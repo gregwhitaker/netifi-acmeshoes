@@ -1,3 +1,51 @@
 plugins {
+    id "com.gradle.build-scan" version "3.0"
+    id "com.github.hierynomus.license" version "0.14.0"
+    id "net.saliman.properties" version "1.4.6"
+    id 'org.springframework.boot' version '2.1.5.RELEASE' apply false
+    id "io.spring.dependency-management" version "1.0.7.RELEASE" apply false
+    id "com.google.protobuf" version "0.8.10" apply false
+}
 
+buildScan {
+    termsOfServiceUrl = "https://gradle.com/terms-of-service"
+    termsOfServiceAgree = "yes"
+}
+
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'com.github.hierynomus.license'
+    apply plugin: 'net.saliman.properties'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    license {
+        header rootProject.file('codequality/LICENSE_HEADER')
+        strictCheck true
+        excludes([ "**/*.json", "**/*.html", "**/*.js", "**/*.css",  "**/*.map" ])
+    }
+}
+
+subprojects {
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencyManagement {
+        imports {
+            mavenBom "com.netifi:netifi-bom:${netifiBomVersion}"
+            mavenBom "org.apache.logging.log4j:log4j-bom:${log4j2Version}"
+        }
+
+        dependencies {
+            dependency "com.netifi:netifi-spring-boot-starter:${netifiSpringVersion}"
+            dependency "com.google.protobuf:protobuf-java:${protobufVersion}"
+            dependency "com.google.protobuf:protoc:${protobufVersion}"
+            dependency "io.rsocket:rsocket-core:${rsocketVersion}"
+            dependency "io.rsocket:rsocket-transport-netty:${rsocketVersion}"
+            dependency "io.rsocket.rpc:rsocket-rpc-protobuf:${rsocketRpcVersion}"
+            dependency "io.rsocket.rpc:rsocket-rpc-core:${rsocketRpcVersion}"
+        }
+    }
 }
