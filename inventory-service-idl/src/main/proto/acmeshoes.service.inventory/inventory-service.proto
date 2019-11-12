@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package acmeshoes.service.inventory;
+
+option java_package = "acmeshoes.service.inventory.protobuf";
+option java_outer_classname = "InventoryServiceProto";
+option java_multiple_files = true;
+
+service InventoryService {
+
+    // Gets inventory for a product.
+    rpc GetProductInventory (ProductInventoryRequest) returns (ProductInventoryResponse) {}
+
+    // Gets inventory for a sku.
+    rpc GetSkuInventory (SkuInventoryRequest) returns (SkuInventoryResponse) {}
+}
+
+message ProductInventoryRequest {
+    string productId = 1;
+}
+
+message ProductInventoryResponse {
+    string productId = 1;
+    repeated SkuInventory skus = 2;
+}
+
+message SkuInventoryRequest {
+    string skuId = 1;
+}
+
+message SkuInventoryResponse {
+    string sku = 1;
+    int32 units = 2;
+}
+
+message SkuInventory {
+    string sku = 1;
+    int32 units = 2;
+}
