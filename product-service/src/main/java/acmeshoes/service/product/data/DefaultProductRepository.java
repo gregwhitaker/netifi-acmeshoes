@@ -74,7 +74,7 @@ public class DefaultProductRepository implements ProductRepository {
     }
 
     @Override
-    public Mono<Product> getProduct(String productId) {
+    public Mono<Product> findOne(String productId) {
         if (productInfos.containsKey(productId)) {
             return Mono.fromSupplier(() -> productInfos.get(productId));
         } else {

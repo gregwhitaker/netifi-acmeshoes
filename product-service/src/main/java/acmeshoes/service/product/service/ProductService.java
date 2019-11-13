@@ -16,10 +16,13 @@
 package acmeshoes.service.product.service;
 
 import acmeshoes.service.product.data.ProductRepository;
+import acmeshoes.service.product.data.model.Product;
+import acmeshoes.service.product.service.error.ProductNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 /**
  * Service that retrieves product information.
@@ -30,4 +33,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository repo;
+
+    public Mono<Product> getProduct(String productId) {
+        return repo.findOne(productId)
+                .switchIfEmpty(Mono.error(new ProductNotFoundException(productId)));
+    }
 }

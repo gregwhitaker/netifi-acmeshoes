@@ -29,5 +29,5 @@ public interface ProductRepository {
      * @param productId product id
      * @return product information
      */
-    Mono<Product> getProduct(String productId);
+    Mono<Product> findOne(String productId);
 }
