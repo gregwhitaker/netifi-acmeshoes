@@ -69,6 +69,8 @@ Follow the steps below to run the application as JARs using Gradle:
 4. In a new terminal, run the following command to start the `store-app`:
 
         ./gradlew :store-app:run
+        
+5. In web browser, navigate to [http://localhost:8080/product/001](http://localhost:8080/product/001) to view the PDP page.
 
 ### Docker
 A Docker Compose file has been provided to make running the Acme Shoes application as a set of Docker containers simple.
@@ -76,6 +78,8 @@ A Docker Compose file has been provided to make running the Acme Shoes applicati
 1. Run the following command to start a single Netifi Broker and the Acme Shoes application:
 
         docker-compose up
+        
+2. In web browser, navigate to [http://localhost:8080/product/001](http://localhost:8080/product/001) to view the PDP page.
 
 ## Bugs and Feedback
 For bugs, questions, and discussions please use the [Github Issues](https://github.com/gregwhitaker/netifi-acmeshoes/issues).
