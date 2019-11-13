@@ -12,7 +12,7 @@ components and without polluting your code with circuit breakers and client-side
 Check out [www.netifi.com](https://www.netifi.com) for more information.
 
 ## Project Structure
-The application contains a number of backend microservices that are called by the [store-app](store-app) to retrieve product information necessary to display a Product Display Page (PDP).
+The application contains a number of backend microservices that are called by the [store-app](store-app) to retrieve product information necessary to display a Product Details Page (PDP).
 
 The APIs for the backend services are defined as Protobuf contracts in the `-idl` projects. These projects, when built, generate service stubs and clients that are imported and used by
 the service and store-app projects.
