@@ -3,7 +3,7 @@ services:
   broker:
     image: netifi/broker
     environment:
-      - "BROKER_SERVER_OPTS=-Dnetifi.broker.ssl.disabled=true -Dnetifi.broker.admin.accessKey=9007199254740991 -Dnetifi.broker.admin.accessToken=kTBDVtfRBO4tHOnZzSyY5ym2kfY= -Dnetifi.authentication.0.accessKey=9007199254740991 -Dnetifi.authentication.0.accessToken=kTBDVtfRBO4tHOnZzSyY5ym2kfY="
+      - "BROKER_SERVER_OPTS=-Dnetifi.broker.ssl.disabled=true -Dnetifi.broker.cluster.clusterName=acmeshoes' -Dnetifi.broker.admin.accessKey=8833333111127534 -Dnetifi.broker.admin.accessToken=Ih+hNsSdxLxAtHceTeEia2MGXSc= -Dnetifi.authentication.0.accessKey=8833333111127534 -Dnetifi.authentication.0.accessToken=Ih+hNsSdxLxAtHceTeEia2MGXSc="
     ports:
       - "6001:6001"
       - "7001:7001"
