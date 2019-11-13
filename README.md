@@ -1,4 +1,13 @@
 # netifi-acmeshoes
+Simple store application that composes calls to backend product information services and displays a product page.
+
+This example application shows you how to build microservice architectures using [Netifi](https://www.netifi.com) and [RSocket](http://rsocket.io).
+
+## Project Structure
+The example contains a number of backend microservices that are called by the [store-app](store-app) to retrieve product information necessary to display a Product Display Page (PDP).
+
+The APIs for the backend services are defined as Protobuf contracts in the `-idl` projects. These projects, when built, generate service stubs and clients that are imported and used by
+the service and store-app projects.
 
 ## License
 Copyright 2019 Greg Whitaker
