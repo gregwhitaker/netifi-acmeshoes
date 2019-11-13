@@ -27,7 +27,6 @@ public class PdpController {
                 .map(pdpData -> {
                     model.addAttribute("pdpData", pdpData);
                     return pdpData == null ? "notfound" : "pdp";
-                })
-                .subscribeOn(Schedulers.elastic());
+                });
     }
 }
