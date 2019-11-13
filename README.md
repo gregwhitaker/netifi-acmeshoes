@@ -14,7 +14,7 @@ Run the following command to build the application:
 
     ./gradlew clean build
     
-When developing in an IDE and modifying the IDL projects you may need to refresh your project classpath in order to see the changes take effect. This is especially true when using IntelliJ. You can refresh the
+When developing in an IDE and modifying the IDL projects you may need to refresh your project classpath in order to see the changes take effect. When using IntelliJ, you can refresh the
 project classpath by clicking the refresh button in the `Gradle` tab.
 
 ### Docker
