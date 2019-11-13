@@ -17,6 +17,7 @@ service InventoryService {
 
 message ProductInventoryRequest {
     string productId = 1;
+    bool showSoldOut = 2;
 }
 
 message ProductInventoryResponse {
