@@ -22,9 +22,47 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 @Component
 public class DefaultSkuInventoryRepository implements SkuInventoryRepository {
     private static final Logger LOG = LoggerFactory.getLogger(DefaultSkuInventoryRepository.class);
+
+    private final Map<String, List<SkuInventory>> productInventory = new HashMap<>();
+    private final Map<String, SkuInventory> skuInventory = new HashMap<>();
+
+    @PostConstruct
+    public void init() {
+        LOG.info("Initializing Dummy Products...");
+
+        final Random rand = new Random(System.currentTimeMillis());
+
+        // Initialize the inventory with 10 dummy products
+        for (int i = 1; i <= 10; i++) {
+            final List<SkuInventory> invs = new ArrayList<>();
+            final String productId = String.format("%03d", i);
+
+            LOG.info("Initializing Product: {}", productId);
+
+            for (int x = 0; x < 3; x++) {
+                SkuInventory s = new SkuInventory();
+                s.setSku(productId + "-" + String.format("%03d", x));
+                s.setUnits(rand.nextInt((100) + 1));
+
+                invs.add(s);
+                skuInventory.put(s.getSku(), s);
+            }
+
+            productInventory.put(productId, invs);
+        }
+
+        LOG.info("Initialization Complete");
+    }
 
     @Override
     public Flux<SkuInventory> findAll(String productId) {
