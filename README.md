@@ -77,6 +77,9 @@ A Docker Compose file has been provided to make running the Acme Shoes applicati
 
         docker-compose up
 
+## Bugs and Feedback
+For bugs, questions, and discussions please use the [Github Issues](https://github.com/gregwhitaker/netifi-acmeshoes/issues).
+
 ## License
 Copyright 2019 Greg Whitaker
 
