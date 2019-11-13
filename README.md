@@ -25,7 +25,7 @@ Run the following command to build the application as Docker containers:
 
     ./gradlew clean buildImage
     
-If the build is successful, you will see the following Docker images in your local Docker repository:
+If the build is successful, you will see the following Docker images in your local Docker registry:
 
     gregnetifi/acmeshoes-store-app              0.1.0
     gregnetifi/acmeshoes-store-app              latest
