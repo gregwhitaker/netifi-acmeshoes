@@ -15,5 +15,19 @@
  */
 package acmeshoes.service.product.data;
 
+import acmeshoes.service.product.data.model.Product;
+import reactor.core.publisher.Mono;
+
+/**
+ * Repository that returns product information.
+ */
 public interface ProductRepository {
+
+    /**
+     * Get product information for a single product.
+     *
+     * @param productId product id
+     * @return product information
+     */
+    Mono<Product> getProduct(String productId);
 }
