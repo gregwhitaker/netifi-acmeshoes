@@ -39,6 +39,12 @@ public class PdpService {
     @Group("acmeshoes.service.inventory")
     private InventoryServiceClient inventoryClient;
 
+    /**
+     * Gathers the information necessary to display a PDP page from the backend services.
+     *
+     * @param productId product id
+     * @return aggregated product information for PDP page
+     */
     public Mono<PdpData> getProductPage(String productId) {
         ProductInfoRequest productInfoRequest = ProductInfoRequest.newBuilder()
                 .setProductId(productId)
