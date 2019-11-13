@@ -6,7 +6,8 @@ This example application shows you how to build microservice architectures using
 ## What is Netifi?
 [Netifi](https://www.netifi.com) is a platform for building cloud-native applications with the power of [RSocket](http://rsocket.io).
 
-Netifi provides service discovery, load-balancing, streaming, and back-pressure without deploying a whole host of infrastructure components and without polluting your code with circuit breakers and client-side load-balancing.
+Netifi provides service discovery, load-balancing, streaming, and back-pressure without deploying a whole host of infrastructure 
+components and without polluting your code with circuit breakers and client-side load-balancing. Check out [www.netifi.com](https://www.netifi.com) for more information.
 
 ## Project Structure
 The application contains a number of backend microservices that are called by the [store-app](store-app) to retrieve product information necessary to display a Product Display Page (PDP).
