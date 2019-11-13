@@ -66,11 +66,19 @@ public class DefaultSkuInventoryRepository implements SkuInventoryRepository {
 
     @Override
     public Flux<SkuInventory> findAll(String productId) {
-        return null;
+        if (productInventory.containsKey(productId)) {
+            return Flux.fromIterable(productInventory.get(productId));
+        } else {
+            return Flux.empty();
+        }
     }
 
     @Override
-    public Mono<SkuInventory> findOne(String skuId) {
-        return null;
+    public Mono<SkuInventory> findOne(String sku) {
+        if (skuInventory.containsKey(sku)) {
+            return Mono.fromSupplier(() -> skuInventory.get(sku));
+        } else {
+            return Mono.empty();
+        }
     }
 }
