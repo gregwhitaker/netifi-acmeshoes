@@ -4,10 +4,25 @@ Simple store application that composes calls to backend product information serv
 This example application shows you how to build microservice architectures using [Netifi](https://www.netifi.com) and [RSocket](http://rsocket.io).
 
 ## Project Structure
-The example contains a number of backend microservices that are called by the [store-app](store-app) to retrieve product information necessary to display a Product Display Page (PDP).
+The application contains a number of backend microservices that are called by the [store-app](store-app) to retrieve product information necessary to display a Product Display Page (PDP).
 
 The APIs for the backend services are defined as Protobuf contracts in the `-idl` projects. These projects, when built, generate service stubs and clients that are imported and used by
 the service and store-app projects.
+
+## Building AcmeShoes
+Run the following command to build the application:
+
+    ./gradlew clean build
+    
+When developing in an IDE and modifying the IDL projects you may need to refresh your project classpath in order to see the changes take effect. This is especially true when using IntelliJ. You can refresh the
+project classpath by clicking the refresh button in the `Gradle` tab.
+
+### Docker
+Run the following command to build the application as Docker containers:
+
+    ./gradlew clean buildImage
+    
+## Running AcmeShoes
 
 ## License
 Copyright 2019 Greg Whitaker
