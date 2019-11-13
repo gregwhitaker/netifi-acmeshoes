@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class="nav-container">
+</div>
+
+<div class="main-container">
+    <section>
+        <div class="container">
+            <div class="product-single">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1><u>ACME Shoes & Apparel</u></h1>
+                    </div>
+                </div>
+                <div class="row mb24 mb-xs-48">
+                    <div class="col-md-5 col-sm-6">
+                        <div class="image-slider slider-thumb-controls controls-inside">
+                            <span class="label">Sale</span>
+                            <ul class="slides">
+                                <li>
+                                    <img alt="Image" src="/img/shop-product-4.png">
+                                </li>
+                                <li>
+                                    <img alt="Image" src="/img/shop-product-4_1.png">
+                                </li>
+                                <li>
+                                    <img alt="Image" src="/img/shop-product-4_2.png">
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="col-md-5 col-md-offset-1 col-sm-6">
+                        <div class="description">
+                            <h4 class="uppercase" th:text="${pdpData.longName}"></h4>
+                            <div class="mb32 mb-xs-24">
+                                <span class="number price old-price">$<span th:text="${pdpData.skus[0].prices.list}"/></span>
+                                <span class="number price">$<span th:text="${pdpData.skus[0].prices.sale}"/></span>
+                            </div>
+                            <p th:text="${pdpData.description}">
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>PRODUCT ID:</strong> <span th:text="${pdpData.getProductId()}" /></li>
+                                <li>
+                                    <strong>COLORS:</strong> Red, Blue, Green</li>
+                                <li>
+                                    <strong>SIZES:</strong> S,M,L</li>
+                            </ul>
+                        </div>
+                        <hr class="mb48 mb-xs-24">
+
+                        <!-- IF PRODUCT SOLD OUT -->
+                        <div th:if="${pdpData.soldout}">
+                            <h3>SOLD OUT!</h3>
+                        </div>
+                        <!-- ELSE -->
+                        <div th:unless="${pdpData.soldout}">
+                            <form class="add-to-cart">
+                                <select class="form-control" th:field="${pdpData.skus}" id="${selectedSku}">
+                                    <option value="0">Select Size</option>
+                                    <option th:each="sku : ${pdpData.skus}" th:value="${sku.sku}" th:text="${sku.size + ' - ' + sku.units + ' In Stock'}">
+                                </select>
+                                <input type="text" placeholder="QTY">
+                                <input type="submit" value="Add To Cart">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="tabbed-content text-tabs">
+                            <ul class="tabs">
+                                <li class="active">
+                                    <div class="tab-title">
+                                        <span>Description</span>
+                                    </div>
+                                    <div class="tab-content">
+                                        <p th:text="${pdpData.description}">
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="tab-title">
+                                        <span>Size Guide</span>
+                                    </div>
+                                    <div class="tab-content">
+                                        <table class="table table-striped table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>Size</th>
+                                                <th>Measurement</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">Small</th>
+                                                <td>
+                                                    <span class="number">16"</span> Neck /
+                                                    <span class="number">8"</span> Sleeve</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Medium</th>
+                                                <td>
+                                                    <span class="number">18"</span> Neck /
+                                                    <span class="number">9"</span> Sleeve</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Large</th>
+                                                <td>
+                                                    <span class="number">20"</span> Neck /
+                                                    <span class="number">10"</span> Sleeve</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/flexslider.min.js"></script>
+<script src="/js/parallax.js"></script>
+<script src="/js/scripts.js"></script>
+</body>
+</html>
