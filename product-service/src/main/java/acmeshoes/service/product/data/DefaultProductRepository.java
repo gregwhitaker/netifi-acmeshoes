@@ -15,9 +15,74 @@
  */
 package acmeshoes.service.product.data;
 
+import acmeshoes.service.product.data.model.Prices;
+import acmeshoes.service.product.data.model.Product;
+import acmeshoes.service.product.data.model.Sku;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
+
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @Component
 public class DefaultProductRepository implements ProductRepository {
+    private static final Random RAND = new Random(System.currentTimeMillis());
 
+    private final Map<String, Product> productInfos = new HashMap<>();
+
+    @PostConstruct
+    public void init() {
+        for (int i = 1; i <= 10; i++) {
+            String productId = String.format("%03d", i);
+
+            Product productInfo = new Product();
+            productInfo.setProductId(productId);
+            productInfo.setShortName("Simple Shoe " + i);
+            productInfo.setLongName("The Simple Shoe - " + i);
+            productInfo.setDescription(String.format("This is some type of shoe - %s, that you can't live without!", i));
+            productInfo.setActive(true);
+
+            for (int x = 0; x < 3; x++) {
+                Prices priceInfo = new Prices();
+                priceInfo.setSale(generateDummyPrice(10.0));
+                priceInfo.setList(generateDummyPrice(priceInfo.getSale()));
+                priceInfo.setMsrp(generateDummyPrice(priceInfo.getList()));
+
+                Sku s = new Sku();
+                s.setSku(productId + "-" + String.format("%03d", x));
+                s.setActive(true);
+
+                if (x == 0) {
+                    s.setSize("Small");
+                } else if (x == 1) {
+                    s.setSize("Medium");
+                } else if (x == 2) {
+                    s.setSize("Large");
+                } else {
+                    s.setSize("One-Size");
+                }
+
+                s.setPrices(priceInfo);
+
+                productInfo.addSkuInfo(s);
+            }
+
+            productInfos.put(productId, productInfo);
+        }
+    }
+
+    @Override
+    public Mono<Product> getProduct(String productId) {
+        return null;
+    }
+
+    private double generateDummyPrice(double min) {
+        double randomValue = min + RAND.nextDouble();
+        double tempRes = Math.floor(randomValue * 10) + 1;
+        double price = tempRes/10;
+
+        return price;
+    }
 }
