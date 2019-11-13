@@ -10,6 +10,9 @@ The APIs for the backend services are defined as Protobuf contracts in the `-idl
 the service and store-app projects.
 
 ## Building AcmeShoes
+The application can be built as JARs or Docker Containers.
+
+### JAR
 Run the following command to build the application:
 
     ./gradlew clean build
@@ -21,6 +24,15 @@ project classpath by clicking the refresh button in the `Gradle` tab.
 Run the following command to build the application as Docker containers:
 
     ./gradlew clean buildImage
+    
+If the build is successful, you will see the following Docker images in your local Docker repository:
+
+    gregnetifi/acmeshoes-store-app              0.1.0               320595d15408        4 seconds ago        449MB
+    gregnetifi/acmeshoes-store-app              latest              320595d15408        4 seconds ago        449MB
+    gregnetifi/acmeshoes-product-service        0.1.0               d47ba320e6dd        22 seconds ago       440MB
+    gregnetifi/acmeshoes-product-service        latest              d47ba320e6dd        22 seconds ago       440MB
+    gregnetifi/acmeshoes-inventory-service      0.1.0               7ab33832a4f7        35 seconds ago       440MB
+    gregnetifi/acmeshoes-inventory-service      latest
     
 ## Running AcmeShoes
 
