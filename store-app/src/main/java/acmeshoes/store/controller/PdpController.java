@@ -18,6 +18,13 @@ public class PdpController {
     @Autowired
     private PdpService pdpService;
 
+    /**
+     * Display the PDP page for a product.
+     *
+     * @param productId product id
+     * @param model mvc model
+     * @return the name of the page to display
+     */
     @GetMapping("/product/{productId}")
     public Mono<String> pdp(@PathVariable("productId") String productId,
                             Model model) {
