@@ -17,7 +17,7 @@ Run the following command to download the [Netifi Community Edition Broker](http
     docker pull netifi/broker:1.6.9
 
 ## Building AcmeShoes
-The application can be built as JARs or Docker Containers.
+The application can be built as JARs or Docker images.
 
 ### JAR
 Run the following command to build the application:
@@ -28,7 +28,7 @@ When developing in an IDE and modifying the IDL projects you may need to refresh
 project classpath by clicking the refresh button in the `Gradle` tab.
 
 ### Docker
-Run the following command to build the application as Docker containers:
+Run the following command to build the application as Docker images:
 
     ./gradlew clean buildImage
     
