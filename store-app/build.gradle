@@ -25,7 +25,7 @@ task buildImage(type: DockerBuildImage, dependsOn: build) {
     buildArgs = ['JAR_FILE': "${bootJar.archiveName}"]
     dockerFile = file("${projectDir}/Dockerfile")
     inputDir = file("${projectDir}")
-    tags = ["netifi/acmeshoe-${projectDir.name}", "netifi/acmeshoe-${projectDir.name}:${version}"]
+    tags = ["gregnetifi/acmeshoes-${projectDir.name}", "gregnetifi/acmeshoes-${projectDir.name}:${version}"]
 }
 
 protobuf {
