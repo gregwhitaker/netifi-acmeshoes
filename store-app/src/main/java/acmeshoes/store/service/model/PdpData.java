@@ -15,9 +15,70 @@
  */
 package acmeshoes.store.service.model;
 
+import acmeshoes.service.inventory.protobuf.ProductInventoryResponse;
+import acmeshoes.service.inventory.protobuf.SkuInventory;
+import acmeshoes.service.product.protobuf.ProductInfoResponse;
+import acmeshoes.service.product.protobuf.SkuInfo;
+
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data required by the PDP page.
+ */
 public class PdpData {
+
+    /**
+     * Creates an instance of {@link PdpData} from the backend service response objects.
+     *
+     * @param productInfo response from product service
+     * @param inventory response from inventory service
+     * @return an instance of {@link PdpData}
+     */
+    public static PdpData from(ProductInfoResponse productInfo, ProductInventoryResponse inventory) {
+        PdpData pdpData = new PdpData();
+        pdpData.setProductId(productInfo.getProductId());
+        pdpData.setActive(productInfo.getActive());
+        pdpData.setShortName(productInfo.getShortName());
+        pdpData.setLongName(productInfo.getLongName());
+        pdpData.setDescription(productInfo.getDescription());
+
+        List<PdpData.Sku> skus = new ArrayList<>();
+
+        for (SkuInfo skuInfo : productInfo.getSkusList()) {
+            PdpData.Sku sku = new PdpData.Sku();
+            sku.setSku(skuInfo.getSku());
+            sku.setActive(skuInfo.getActive());
+            sku.setSize(skuInfo.getSize());
+            sku.setUnits(0);
+
+            for (SkuInventory skuInv : inventory.getSkusList()) {
+                if (skuInv.getSku().equals(skuInfo.getSku())) {
+                    sku.setUnits(skuInv.getUnits());
+                    break;
+                }
+            }
+
+            PdpData.Prices prices = new PdpData.Prices();
+            prices.setList(skuInfo.getPrices().getFormattedList());
+            prices.setMsrp(skuInfo.getPrices().getFormattedMsrp());
+            prices.setSale(skuInfo.getPrices().getFormattedSale());
+
+            sku.setPrices(prices);
+
+            skus.add(sku);
+        }
+
+        pdpData.setSkus(skus);
+
+        // If all skus do not have any inventory then mark the product sold out
+        if (pdpData.getSkus().stream().noneMatch(sku -> sku.getUnits() > 0)) {
+            pdpData.setSoldout(true);
+        }
+
+        return pdpData;
+    }
+
     private String productId;
     private boolean active;
     private boolean soldout = false;
