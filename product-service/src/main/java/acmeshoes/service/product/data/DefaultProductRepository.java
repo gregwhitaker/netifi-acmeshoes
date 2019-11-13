@@ -75,14 +75,17 @@ public class DefaultProductRepository implements ProductRepository {
 
     @Override
     public Mono<Product> getProduct(String productId) {
-        return null;
+        if (productInfos.containsKey(productId)) {
+            return Mono.fromSupplier(() -> productInfos.get(productId));
+        } else {
+            return Mono.empty();
+        }
     }
 
     private double generateDummyPrice(double min) {
         double randomValue = min + RAND.nextDouble();
         double tempRes = Math.floor(randomValue * 10) + 1;
-        double price = tempRes/10;
 
-        return price;
+        return tempRes/10;
     }
 }
