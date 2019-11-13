@@ -25,12 +25,8 @@ public class PdpController {
         return pdpService.getProductPage(productId)
                 .switchIfEmpty(Mono.fromSupplier(() -> null))
                 .map(pdpData -> {
-                    if (pdpData == null) {
-                        return "notfound";
-                    } else {
-                        model.addAttribute("pdpData", pdpData);
-                        return "pdp";
-                    }
+                    model.addAttribute("pdpData", pdpData);
+                    return pdpData == null ? "notfound" : "pdp";
                 })
                 .subscribeOn(Schedulers.elastic());
     }
