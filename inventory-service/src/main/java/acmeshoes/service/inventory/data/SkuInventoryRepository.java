@@ -19,9 +19,24 @@ import acmeshoes.service.inventory.data.model.SkuInventory;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * Repository that returns SKU inventory information.
+ */
 public interface SkuInventoryRepository {
 
+    /**
+     * Return inventory for all SKUs in a product line.
+     *
+     * @param productId product id
+     * @return inventory for all SKUs in a product line
+     */
     Flux<SkuInventory> findAll(String productId);
 
+    /**
+     * Return inventory for a single product SKU
+     *
+     * @param skuId sku id
+     * @return inventory for a single product SKU
+     */
     Mono<SkuInventory> findOne(String skuId);
 }
