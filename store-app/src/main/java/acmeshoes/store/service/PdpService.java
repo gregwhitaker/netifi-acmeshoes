@@ -16,6 +16,10 @@
 package acmeshoes.store.service;
 
 import acmeshoes.service.inventory.protobuf.InventoryServiceClient;
+import acmeshoes.service.inventory.protobuf.ProductInventoryRequest;
+import acmeshoes.service.inventory.protobuf.ProductInventoryResponse;
+import acmeshoes.service.product.protobuf.ProductInfoRequest;
+import acmeshoes.service.product.protobuf.ProductInfoResponse;
 import acmeshoes.service.product.protobuf.ProductServiceClient;
 import acmeshoes.store.service.model.PdpData;
 import com.netifi.spring.core.annotation.Group;
@@ -36,6 +40,18 @@ public class PdpService {
     private InventoryServiceClient inventoryClient;
 
     public Mono<PdpData> getProductPage(String productId) {
-        return null;
+        ProductInfoRequest productInfoRequest = ProductInfoRequest.newBuilder()
+                .setProductId(productId)
+                .build();
+
+        ProductInventoryRequest productInventoryRequest = ProductInventoryRequest.newBuilder()
+                .setProductId(productId)
+                .build();
+
+        Mono<ProductInfoResponse> productInfo = productClient.getProductInfo(productInfoRequest);
+        Mono<ProductInventoryResponse> productInventory = inventoryClient.getProductInventory(productInventoryRequest);
+
+        return Mono.zip(productInfo, productInventory)
+                .map(objects -> PdpData.from(objects.getT1(), objects.getT2()));
     }
 }
