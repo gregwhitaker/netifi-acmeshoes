@@ -26,6 +26,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+/**
+ * Controller responsible for returning product and sku inventory information.
+ */
 @Component
 public class InventoryController implements InventoryService {
 
