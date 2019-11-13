@@ -70,7 +70,7 @@ public class InventoryService {
     /**
      * Get the inventory for a single SKU.
      *
-     * @param skuId sku
+     * @param sku sku id
      * @return the inventory of the SKU
      */
     public Mono<SkuInventory> getInventoryForSku(String sku) {
