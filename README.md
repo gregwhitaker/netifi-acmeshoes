@@ -47,8 +47,35 @@ Follow the steps below to run the application.
 ### JAR
 Follow the steps below to run the application as JARs using Gradle:
 
+1. Run the following command to start a Netifi Broker:
+
+        docker run \
+        -p 8001:8001 -p 8101:8101 -p 7001:7001 -p 6001:6001 \
+        -e BROKER_SERVER_OPTS="'-Dnetifi.broker.admin.accessKey=8833333111127534' \
+        '-Dnetifi.broker.admin.accessToken=Ih+hNsSdxLxAtHceTeEia2MGXSc=' \
+        '-Dnetifi.authentication.0.accessKey=8833333111127534'
+        '-Dnetifi.authentication.0.accessToken=Ih+hNsSdxLxAtHceTeEia2MGXSc=' \
+        '-Dnetifi.broker.ssl.disabled=true'"  \
+        netifi/broker:1.6.9
+
+2. In a new terminal, run the following command to start the `inventory-service`:
+
+        ./gradlew :inventory-service:run
+        
+3. In a new terminal, run the following command to start the `product-service`:
+
+        ./gradlew :product-service:run
+        
+4. In a new terminal, run the following command to start the `store-app`:
+
+        ./gradlew :store-app:run
+
 ### Docker
-Follow the steps below to run the application as a set of Docker containers:
+A Docker Compose file has been provided to make running the Acme Shoes application as a set of Docker containers simple.
+
+1. Run the following command to start a single Netifi Broker and the Acme Shoes application:
+
+        docker-compose up
 
 ## License
 Copyright 2019 Greg Whitaker
