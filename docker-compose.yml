@@ -1,0 +1,34 @@
+version: '3'
+services:
+  broker:
+    image: netifi/broker
+    environment:
+      - "BROKER_SERVER_OPTS=-Dnetifi.broker.ssl.disabled=true -Dnetifi.broker.admin.accessKey=9007199254740991 -Dnetifi.broker.admin.accessToken=kTBDVtfRBO4tHOnZzSyY5ym2kfY= -Dnetifi.authentication.0.accessKey=9007199254740991 -Dnetifi.authentication.0.accessToken=kTBDVtfRBO4tHOnZzSyY5ym2kfY="
+    ports:
+      - "6001:6001"
+      - "7001:7001"
+      - "8001:8001"
+      - "8101:8101"
+  inventory-service:
+    image: gregnetifi/acmeshoes-inventory-service
+    environment:
+      - "SPRING_PROFILES_ACTIVE='localdocker'"
+    depends_on:
+      - broker
+    network_mode: host
+  product-service:
+    image: gregnetifi/acmeshoes-product-service
+    environment:
+      - "SPRING_PROFILES_ACTIVE='localdocker'"
+    depends_on:
+      - broker
+    network_mode: host
+  store-app:
+    image: gregnetifi/acmeshoes-store-app
+    environment:
+      - "SPRING_PROFILES_ACTIVE='localdocker'"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - broker
+    network_mode: host
