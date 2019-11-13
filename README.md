@@ -9,6 +9,13 @@ The application contains a number of backend microservices that are called by th
 The APIs for the backend services are defined as Protobuf contracts in the `-idl` projects. These projects, when built, generate service stubs and clients that are imported and used by
 the service and store-app projects.
 
+## Prerequisites
+This application requires a running instance of the Netifi Broker.
+
+Run the following command to download the [Netifi Community Edition Broker](https://www.netifi.com/netifi-ce) as a Docker container:
+
+    docker pull netifi/broker:1.6.9
+
 ## Building AcmeShoes
 The application can be built as JARs or Docker Containers.
 
@@ -35,6 +42,13 @@ If the build is successful, you will see the following Docker images in your loc
     gregnetifi/acmeshoes-inventory-service      latest
     
 ## Running AcmeShoes
+Follow the steps below to run the application.
+
+### JAR
+Follow the steps below to run the application as JARs using Gradle:
+
+### Docker
+Follow the steps below to run the application as a set of Docker containers:
 
 ## License
 Copyright 2019 Greg Whitaker
