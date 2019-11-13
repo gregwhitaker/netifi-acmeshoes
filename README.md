@@ -72,6 +72,8 @@ Follow the steps below to run the application as JARs using Gradle:
         
 5. In web browser, navigate to [http://localhost:8080/product/001](http://localhost:8080/product/001) to view the PDP page.
 
+    ![acme shoes pdp](acmeshoes-pdp.png)
+
 ### Docker
 A Docker Compose file has been provided to make running the Acme Shoes application as a set of Docker containers simple.
 
@@ -80,6 +82,8 @@ A Docker Compose file has been provided to make running the Acme Shoes applicati
         docker-compose up
         
 2. In web browser, navigate to [http://localhost:8080/product/001](http://localhost:8080/product/001) to view the PDP page.
+
+![acme shoes pdp](acmeshoes-pdp.png)
 
 ## Bugs and Feedback
 For bugs, questions, and discussions please use the [Github Issues](https://github.com/gregwhitaker/netifi-acmeshoes/issues).
