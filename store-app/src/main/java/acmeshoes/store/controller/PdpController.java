@@ -20,7 +20,7 @@ public class PdpController {
 
     @GetMapping("/product/{productId}")
     public Mono<String> pdp(@PathVariable("productId") String productId,
-                      Model model) {
+                            Model model) {
         return pdpService.getProductPage(productId)
                 .switchIfEmpty(Mono.fromSupplier(() -> null))
                 .map(pdpData -> {
