@@ -13,36 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package acmeshoes.service.inventory.data.model;
+package acmeshoes.service.inventory.service.error;
 
 /**
- * Inventory information for a single product SKU.
+ * Exception thrown when a SKU cannot be found.
  */
-public class SkuInventory {
+public class SkuNotFoundException extends RuntimeException {
 
     private String sku;
-    private int units;
 
-    public SkuInventory() {}
-
-    public SkuInventory(String sku, int units) {
-        this.sku = sku;
-        this.units = units;
+    public SkuNotFoundException(final String sku) {
+        super("Sku not found: " + sku);
     }
 
     public String getSku() {
         return sku;
-    }
-
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
-
-    public int getUnits() {
-        return units;
-    }
-
-    public void setUnits(int units) {
-        this.units = units;
     }
 }
