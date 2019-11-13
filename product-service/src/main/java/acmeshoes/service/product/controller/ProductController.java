@@ -15,13 +15,18 @@
  */
 package acmeshoes.service.product.controller;
 
+import acmeshoes.service.product.protobuf.PriceInfo;
 import acmeshoes.service.product.protobuf.ProductInfoRequest;
 import acmeshoes.service.product.protobuf.ProductInfoResponse;
 import acmeshoes.service.product.protobuf.ProductService;
+import acmeshoes.service.product.protobuf.SkuInfo;
 import io.netty.buffer.ByteBuf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controller responsible for returning product information.
@@ -34,6 +39,31 @@ public class ProductController implements ProductService {
 
     @Override
     public Mono<ProductInfoResponse> getProductInfo(ProductInfoRequest message, ByteBuf metadata) {
-        return null;
+        return ps.getProduct(message.getProductId())
+                .map(productInfo -> {
+                    List<SkuInfo> skuInfos = new ArrayList<>();
+                    productInfo.getSkus().forEach(si -> skuInfos.add(SkuInfo.newBuilder()
+                            .setSku(si.getSku())
+                            .setActive(si.isActive())
+                            .setSize(si.getSize())
+                            .setPrices(PriceInfo.newBuilder()
+                                    .setList(si.getPrices().getList())
+                                    .setMsrp(si.getPrices().getMsrp())
+                                    .setSale(si.getPrices().getSale())
+                                    .setFormattedList(si.getPrices().getFormattedList())
+                                    .setFormattedMsrp(si.getPrices().getFormattedMsrp())
+                                    .setFormattedSale(si.getPrices().getFormattedSale())
+                                    .build())
+                            .build()));
+
+                    return ProductInfoResponse.newBuilder()
+                            .setProductId(productInfo.getProductId())
+                            .setShortName(productInfo.getShortName())
+                            .setLongName(productInfo.getLongName())
+                            .setActive(productInfo.isActive())
+                            .setDescription(productInfo.getDescription())
+                            .addAllSkus(skuInfos)
+                            .build();
+                });
     }
 }
